@@ -2,7 +2,7 @@
 pragma solidity 0.8.10;
 
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
-import "@openzeppelin/contracts/token/ERC1155/presets/ERC1155PresetMinterPauser.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "../interfaces/IAccessManager.sol";
 import "../interfaces/IAddressesRegistry.sol";
 import "../libraries/Errors.sol";
@@ -15,7 +15,7 @@ import {IAccessNFT} from "../interfaces/IAccessNFT.sol";
  * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
  */
 
-contract AccessNFT is ERC1155PresetMinterPauser, IAccessNFT {
+contract AccessNFT is ERC1155, IAccessNFT {
     bool public deadlinesOn;
     address public immutable addressesRegistry;
     //function hashes -> tokenIDs -> deadline
@@ -25,7 +25,7 @@ contract AccessNFT is ERC1155PresetMinterPauser, IAccessNFT {
     //flashloan protection
     mapping(uint256 => bytes32) public tokenUsedInTransaction;
 
-    constructor(address _addressesRegistry, bool _deadlinesOn) ERC1155PresetMinterPauser("") {
+    constructor(address _addressesRegistry, bool _deadlinesOn) ERC1155("") {
         addressesRegistry = _addressesRegistry;
         deadlinesOn = _deadlinesOn;
     }
@@ -141,5 +141,13 @@ contract AccessNFT is ERC1155PresetMinterPauser, IAccessNFT {
     /// @inheritdoc IAccessNFT
     function adminBurn(address account, uint256 id, uint256 amount) external onlyPoolAdmin {
         _burn(account, id, amount);
+    }
+
+        function mint(address account, uint256 id, uint256 amount, bytes memory data) external onlyPoolAdmin {
+        _mint(account, id, amount, data);
+    }
+
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) external onlyPoolAdmin {
+        _mintBatch(to, ids, amounts, data);
     }
 }
