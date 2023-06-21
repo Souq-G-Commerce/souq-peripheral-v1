@@ -30,3 +30,5 @@ yarn.lock
 .yarn
 bin
 .yarn/*
+scripts
+scripts/*
