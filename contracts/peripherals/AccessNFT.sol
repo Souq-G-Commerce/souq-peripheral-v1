@@ -143,7 +143,7 @@ contract AccessNFT is ERC1155, IAccessNFT {
         _burn(account, id, amount);
     }
 
-        function mint(address account, uint256 id, uint256 amount, bytes memory data) external onlyPoolAdmin {
+    function mint(address account, uint256 id, uint256 amount, bytes memory data) external onlyPoolAdmin {
         _mint(account, id, amount, data);
     }
 

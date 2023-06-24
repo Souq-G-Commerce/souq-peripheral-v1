@@ -66,4 +66,8 @@ interface IAccessNFT {
      * @param amount The amount to burn
      */
     function adminBurn(address account, uint256 id, uint256 amount) external;
+
+    function mint(address account, uint256 id, uint256 amount, bytes memory data) external;
+
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) external;
 }
