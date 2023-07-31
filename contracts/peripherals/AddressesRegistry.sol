@@ -108,7 +108,7 @@ contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradea
 
     /// @inheritdoc IAddressesRegistry
     function addPoolFactory(bytes32 _id, address _add) external onlyOwner {
-        poolFactories[_id] = bytes32(abi.encodePacked("POOL_FACTORY_",_id));
+        poolFactories[_id] = bytes32(abi.encodePacked("POOL_FACTORY_", _id));
         addresses[poolFactories[_id]] = _add;
         emit PoolFactoryAdded(_id, _add);
     }
@@ -132,7 +132,7 @@ contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradea
 
     /// @inheritdoc IAddressesRegistry
     function addVaultFactory(bytes32 _id, address _add) external onlyOwner {
-        vaultFactories[_id] = bytes32(abi.encodePacked("VAULT_FACTORY_",_id));
+        vaultFactories[_id] = bytes32(abi.encodePacked("VAULT_FACTORY_", _id));
         addresses[vaultFactories[_id]] = _add;
         emit VaultFactoryAdded(_id, _add);
     }
@@ -155,7 +155,7 @@ contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradea
      * @param newImplementation The new implementation contract address used for the upgrade.
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
-        require(newImplementation != address(0),Errors.ADDRESS_IS_ZERO);
+        require(newImplementation != address(0), Errors.ADDRESS_IS_ZERO);
         version++;
     }
 }

@@ -120,7 +120,7 @@ contract SouqTimelock is TimelockUpgradeable {
      * @param _pendingAdmin The address of the new pending administrator (not used in this implementation)
      */
     function setPendingAdmin(address _pendingAdmin) external pure override {
-        require(_pendingAdmin != address(0),Errors.ADDRESS_IS_ZERO);
+        require(_pendingAdmin != address(0), Errors.ADDRESS_IS_ZERO);
         revert(Errors.TIMELOCK_USES_ACCESS_CONTROL);
     }
 }

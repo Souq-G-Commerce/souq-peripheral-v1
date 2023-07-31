@@ -30,6 +30,7 @@ interface IAccessNFT {
      * @return bool The boolean (true = has nft)
      */
     function HasAccessNFT(address user, uint256 tokenId, string calldata functionName) external view returns (bool);
+
     /**
      * @dev Sets the deadline for a specific function and token id (NFT)
      * @param functionName The function name
@@ -37,6 +38,7 @@ interface IAccessNFT {
      * @param tokenId The token id
      */
     function setDeadline(string calldata functionName, uint256 deadline, uint256 tokenId) external;
+
     /**
      * @dev Retrieves the deadline for a specific function and NFT.
      * @param hashedFunctionName The hashed function name
@@ -44,21 +46,25 @@ interface IAccessNFT {
      * @return deadline The deadline
      */
     function getDeadline(bytes32 hashedFunctionName, uint256 tokenId) external view returns (uint256);
+
     /**
      * @dev Toggles the state of deadlines for function access.
      */
     function toggleDeadlines() external;
+
     /**
      * @dev Sets the fee discount percentage for a specific NFT
      * @param tokenId The token id
      * @param discount The discount in wei
      */
     function setFeeDiscount(uint256 tokenId, uint256 discount) external;
+
     /**
      * @dev Sets the URI for the token metadata
      * @param newuri The token id
      */
     function setURI(string memory newuri) external;
+
     /**
      * @dev Burns a specific amount of tokens owned by an account
      * @param account The account to burn from
