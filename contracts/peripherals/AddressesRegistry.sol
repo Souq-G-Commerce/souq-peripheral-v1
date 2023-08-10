@@ -146,8 +146,8 @@ contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradea
 
     /// @inheritdoc IAddressesRegistry
     function updateProxy(bytes32 _id, address _logic) external onlyOwner {
-        UUPSUpgradeable(addresses[_id]).upgradeTo(_logic);
         emit ProxyUpgraded(_id, _logic, addresses[_id]);
+        UUPSUpgradeable(addresses[_id]).upgradeTo(_logic);
     }
 
     /**

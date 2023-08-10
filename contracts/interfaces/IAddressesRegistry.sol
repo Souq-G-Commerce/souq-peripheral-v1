@@ -7,7 +7,6 @@ pragma solidity 0.8.10;
  * @notice Defines the interface of the addresses registry.
  * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
  */
-
 interface IAddressesRegistry {
     /**
      * @dev Emitted when the connectors router address is updated.

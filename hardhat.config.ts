@@ -86,7 +86,7 @@ const config: HardhatUserConfig = {
         forking:{
           blockNumber: 16889989,
           enabled: true,
-          url: "https://mainnet.infura.io/v3/81225b20a74b46aa8f87b382d5cb1dfb",
+          url: "https://mainnet.infura.io/v3/" + process.env.INFURA_API,
         },
       accounts: {
         mnemonic,

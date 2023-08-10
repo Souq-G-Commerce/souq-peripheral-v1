@@ -58,6 +58,13 @@ interface IAccessNFT {
      * @param discount The discount in wei
      */
     function setFeeDiscount(uint256 tokenId, uint256 discount) external;
+    
+    /**
+     * @dev Returns the fee discount percentage for a specific NFT
+     * @param tokenId The token id
+     * @return uint256 The discount in wei
+     */
+    function getFeeDiscount(uint256 tokenId) external view returns(uint256);
 
     /**
      * @dev Sets the URI for the token metadata
@@ -73,7 +80,21 @@ interface IAccessNFT {
      */
     function adminBurn(address account, uint256 id, uint256 amount) external;
 
+    /**
+     * @dev Mints token to user account
+     * @param account The account to mint to
+     * @param id The token id
+     * @param amount The amount to mint
+     * @param data The data
+     */
     function mint(address account, uint256 id, uint256 amount, bytes memory data) external;
 
+    /**
+     * @dev Batch mints tokens to user account
+     * @param to The account to mint to
+     * @param ids The token ids
+     * @param amounts The amounts to mint
+     * @param data The data
+     */
     function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) external;
 }

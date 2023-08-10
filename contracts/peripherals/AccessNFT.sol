@@ -7,6 +7,7 @@ import "../interfaces/IAccessManager.sol";
 import "../interfaces/IAddressesRegistry.sol";
 import "../libraries/Errors.sol";
 import {IAccessNFT} from "../interfaces/IAccessNFT.sol";
+import {MathHelpers} from "../libraries/MathHelpers.sol";
 
 /**
  * @title AccessNFT
@@ -26,6 +27,7 @@ contract AccessNFT is ERC1155, IAccessNFT {
     mapping(uint256 => bytes32) public tokenUsedInTransaction;
 
     constructor(address _addressesRegistry, bool _deadlinesOn) ERC1155("") {
+        require(_addressesRegistry != address(0), Errors.ADDRESS_IS_ZERO);
         addressesRegistry = _addressesRegistry;
         deadlinesOn = _deadlinesOn;
     }
@@ -49,10 +51,10 @@ contract AccessNFT is ERC1155, IAccessNFT {
         //Everyone has access after deadline ends
         //Using block.timestamp is safer than block number
         //See: https://ethereum.stackexchange.com/questions/11060/what-is-block-timestamp/11072#11072
-        if ((block.timestamp > deadlines[hashedName][tokenId]) || (deadlinesOn == false)) {
+        if ((block.timestamp > deadlines[hashedName][tokenId]) || !(deadlinesOn)) {
             return true;
         }
-        return this.balanceOf(user, tokenId) > 0;
+        return balanceOf(user, tokenId) > 0;
     }
 
     /**
@@ -86,7 +88,7 @@ contract AccessNFT is ERC1155, IAccessNFT {
         bytes memory data
     ) public virtual override {
         bytes32 currentTransaction = keccak256(abi.encodePacked(block.number));
-        for (uint256 i = 0; i < ids.length; i++) {
+        for (uint256 i; i < ids.length; ++i) {
             require(tokenUsedInTransaction[ids[i]] != currentTransaction, Errors.FLASHLOAN_PROTECTION_ENABLED);
             tokenUsedInTransaction[ids[i]] = keccak256(abi.encodePacked(block.number));
         }
@@ -115,9 +117,14 @@ contract AccessNFT is ERC1155, IAccessNFT {
 
     /// @inheritdoc IAccessNFT
     function setFeeDiscount(uint256 tokenId, uint256 discount) external onlyPoolAdmin {
-        require(discount >= 0, "Discount must not be less than 0");
-        require(discount <= 100, "Discount must be less than or equal to 100");
+        require(discount <= MathHelpers.convertToWad(100), Errors.DISCOUNT_EXCEEDS_100);
         discountPercentage[tokenId] = discount;
+    }
+
+    /// @inheritdoc IAccessNFT
+    function getFeeDiscount(uint256 tokenId) external view returns(uint256)
+    {
+        return discountPercentage[tokenId];
     }
 
     /**

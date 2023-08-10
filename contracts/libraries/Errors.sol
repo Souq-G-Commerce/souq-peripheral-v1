@@ -3,9 +3,8 @@ pragma solidity 0.8.10;
 
 /**
  * @title library for Errors mapping
- * @author Souq
+ * @author Souq.Finance
  * @notice Defines the output of error messages reverted by the contracts of the Souq protocol
- * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
  */
 library Errors {
     string public constant ADDRESS_IS_ZERO = "ADDRESS_IS_ZERO";
@@ -45,6 +44,7 @@ library Errors {
     string public constant DEPOSIT_LIMIT_REACHED = "DEPOSIT_LIMIT_REACHED";
     string public constant SHARES_VALUE_EXCEEDS_TARGET = "SHARES_VALUE_EXCEEDS_TARGET";
     string public constant SHARES_VALUE_BELOW_TARGET = "SHARES_VALUE_BELOW_TARGET";
+    string public constant LP_VALUE_BELOW_TARGET = "LP_VALUE_BELOW_TARGET";
     string public constant SHARES_TARGET_EXCEEDS_RESERVE = "SHARES_TARGET_EXCEEDS_RESERVE";
     string public constant SWAPPING_SHARES_TEMPORARY_DISABLED_DUE_TO_LOW_CONDITIONS =
         "SWAPPING_SHARES_TEMPORARY_DISABLED_DUE_TO_LOW_CONDITIONS";
@@ -73,4 +73,10 @@ library Errors {
     string public constant INVALID_STABLECOIN_YIELD_CONNECTOR = "INVALID_STABLECOIN_YIELD_CONNECTOR";
     string public constant STABLECOIN_YIELD_CONNECTOR_NOT_FOUND = "STABLECOIN_YIELD_CONNECTOR_NOT_FOUND";
     string public constant TIMELOCK_USES_ACCESS_CONTROL = "TIMELOCK_USES_ACCESS_CONTROL";
+    string public constant TIMELOCK_ETA_MUST_SATISFY_DELAY = "TIMELOCK_ETA_MUST_SATISFY_DELAY";
+    string public constant TIMELOCK_TRANSACTION_NOT_READY = "TIMELOCK_TRANSACTION_NOT_READY";
+    string public constant TIMELOCK_TRANSACTION_ALREADY_EXECUTED = "TIMELOCK_TRANSACTION_ALREADY_EXECUTED";
+    string public constant TIMELOCK_TRANSACTION_ALREADY_QUEUED = "TIMELOCK_TRANSACTION_ALREADY_QUEUED";
+    string public constant APPROVAL_FAILED = "APPROVAL_FAILED";
+    string public constant DISCOUNT_EXCEEDS_100 = "DISCOUNT_EXCEEDS_100";
 }

@@ -32,3 +32,4 @@ bin
 .yarn/*
 scripts
 scripts/*
+hardhat.config.ts
