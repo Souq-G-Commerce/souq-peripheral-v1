@@ -12,7 +12,7 @@ import {Errors} from "../libraries/Errors.sol";
  * @title AddressesRegistry
  * @author Souq.Finance
  * @notice The Addresses registry of the souq protocol
- * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
+ * @notice License: https://souq-peripherals.s3.amazonaws.com/LICENSE.md
  */
 
 contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradeable, UUPSUpgradeable {
@@ -29,6 +29,7 @@ contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradea
     mapping(bytes32 => bytes32) public vaultFactories;
 
     function initialize() external initializer {
+        __UUPSUpgradeable_init();
         __Ownable_init();
         version = 1;
     }
@@ -156,6 +157,6 @@ contract AddressesRegistry is IAddressesRegistry, Initializable, OwnableUpgradea
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
         require(newImplementation != address(0), Errors.ADDRESS_IS_ZERO);
-        version++;
+        ++version;
     }
 }

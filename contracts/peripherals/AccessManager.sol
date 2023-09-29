@@ -11,7 +11,7 @@ import {Errors} from "../libraries/Errors.sol";
  * @title AccessManager
  * @author Souq.Finance
  * @notice The Souq AccessControl Manager. Saves and Lists all admins.
- * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
+ * @notice License: https://souq-peripherals.s3.amazonaws.com/LICENSE.md
  */
 contract AccessManager is AccessControl, IAccessManager {
     bytes32 public constant override POOL_ADMIN_ROLE = keccak256("POOL_ADMIN");

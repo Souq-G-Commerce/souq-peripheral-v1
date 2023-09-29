@@ -6,7 +6,7 @@
  |____/   \___/   \___/   \__\_\ (_) |_|     |___| |_| \_| /_/   \_\ |_| \_|  \____| |_____|
 
 ```
-# Souq Peripheral V1
+# Souq Peripherals
 
 This repository contains all the peripherals smart contract source code for Souq Protocol Components. The repository uses Hardhat as development environment for compilation, testing and deployment tasks.
 
