@@ -8,7 +8,7 @@
 ```
 # Souq Peripheral V1
 
-This repository contains all the peripheral smart contract source code for Souq Protocol Components. The repository uses Hardhat as development environment for compilation, testing and deployment tasks.
+This repository contains all the peripherals smart contract source code for Souq Protocol Components. The repository uses Hardhat as development environment for compilation, testing and deployment tasks.
 
 # What is Souq?
 

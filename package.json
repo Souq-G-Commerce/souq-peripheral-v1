@@ -1,7 +1,7 @@
 {
-  "name": "souq-peripheral-v1",
-  "description": "Souq Peripheral v1",
-  "version": "1.0.0",
+  "name": "souq-peripherals",
+  "description": "Souq Peripherals",
+  "version": "1.0.1",
   "author": {
     "name": "Souq Dev Team",
     "url": "https://souq.finance"

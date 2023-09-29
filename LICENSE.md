@@ -8,7 +8,7 @@ Parameters
 
 Licensor: Souq G-Commerce, Inc.
 
-Licensed Work: [souq-peripheral-v1](https://github.com/Souq-G-Commerce/souq-peripheral-v1).
+Licensed Work: [souq-peripherals](https://github.com/Souq-G-Commerce/souq-peripherals).
 The Licensed Work is © 2023 Souq G-Commerce, Inc.
 
 Additional Use Grant: None
