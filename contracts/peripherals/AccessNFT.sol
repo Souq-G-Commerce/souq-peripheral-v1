@@ -13,7 +13,7 @@ import {MathHelpers} from "../libraries/MathHelpers.sol";
  * @title AccessNFT
  * @author Souq.Finance
  * @notice The ERC1155 Access NFT Contract that enables users to interact with the Pool at approved times and get discounts if set
- * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
+ * @notice License: https://souq-peripherals.s3.amazonaws.com/LICENSE.md
  */
 
 contract AccessNFT is ERC1155, IAccessNFT {
@@ -122,8 +122,7 @@ contract AccessNFT is ERC1155, IAccessNFT {
     }
 
     /// @inheritdoc IAccessNFT
-    function getFeeDiscount(uint256 tokenId) external view returns(uint256)
-    {
+    function getFeeDiscount(uint256 tokenId) external view returns (uint256) {
         return discountPercentage[tokenId];
     }
 

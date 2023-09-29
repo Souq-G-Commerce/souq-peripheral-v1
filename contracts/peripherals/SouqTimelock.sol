@@ -15,8 +15,7 @@ import {Errors} from "../libraries/Errors.sol";
  * @title SouqTimelock
  * @author Souq.Finance
  * @notice This contract implements a timelock mechanism similar to TimelockController.sol by openzeppelin
- * @notice Original https://github.com/OpenZeppelin/openzeppelin-contracts/blob/5ae630684a0f57de400ef69499addab4c32ac8fb/contracts/governance/TimelockController.sol
- * @notice License: https://souq-peripheral-v1.s3.amazonaws.com/LICENSE.md
+ * @notice License: https://souq-peripherals.s3.amazonaws.com/LICENSE.md
  */
 
 contract SouqTimelock is Initializable, OwnableUpgradeable, UUPSUpgradeable, ISouqTimelock {
@@ -35,6 +34,7 @@ contract SouqTimelock is Initializable, OwnableUpgradeable, UUPSUpgradeable, ISo
 
     /// @inheritdoc ISouqTimelock
     function initialize(uint _delay, address _registry) external initializer {
+        require(_registry != address(0), Errors.ADDRESS_IS_ZERO);
         version = 1;
         _minDelay = _delay;
         registry = IAddressesRegistry(_registry);
@@ -117,6 +117,7 @@ contract SouqTimelock is Initializable, OwnableUpgradeable, UUPSUpgradeable, ISo
         bytes memory data,
         uint eta
     ) external onlyTimelockAdmin returns (bytes32) {
+        require(target != address(0), Errors.ADDRESS_IS_ZERO);
         require(eta >= getBlockTimeStamp().add(getMinDelay()), Errors.TIMELOCK_ETA_MUST_SATISFY_DELAY);
         bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
         require(!isTransaction(txHash), Errors.TIMELOCK_TRANSACTION_ALREADY_QUEUED);
@@ -133,6 +134,7 @@ contract SouqTimelock is Initializable, OwnableUpgradeable, UUPSUpgradeable, ISo
         bytes memory data,
         uint eta
     ) external onlyTimelockAdmin {
+        require(target != address(0), Errors.ADDRESS_IS_ZERO);
         bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
         require(!isTransactionDone(txHash), Errors.TIMELOCK_TRANSACTION_ALREADY_EXECUTED);
         delete _timestamps[txHash];
@@ -147,6 +149,7 @@ contract SouqTimelock is Initializable, OwnableUpgradeable, UUPSUpgradeable, ISo
         bytes memory data,
         uint eta
     ) external payable onlyTimelockAdmin returns (bytes memory) {
+        require(target != address(0), Errors.ADDRESS_IS_ZERO);
         bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
         require(isTransactionReady(txHash), Errors.TIMELOCK_TRANSACTION_NOT_READY);
         bytes memory callData;
@@ -178,6 +181,6 @@ contract SouqTimelock is Initializable, OwnableUpgradeable, UUPSUpgradeable, ISo
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyUpdater {
         require(newImplementation != address(0), Errors.ADDRESS_IS_ZERO);
-        version++;
+        ++version;
     }
 }
